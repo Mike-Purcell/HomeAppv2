@@ -3,98 +3,69 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
+        <title>Home App</title>
+        <link rel="stylesheet" type="text/css" href="css/app.css">
+        <script src="https://kit.fontawesome.com/0d6ad6dcf2.js" crossorigin="anonymous" async></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" async></script>
     </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="navbar-brand">
+            <i class="fas fa-home fa-2x navbar-text"></i>
+            <div class="h1 navbar-text">Home App</div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-9">
+                <div class="h3 text-center text-info">Calendar</div>
+            </div>
+            <div class="col-3">
+                <div class="h3 text-center text-info">Shopping list</div>
+                <div id="list">
+                    <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center" v-for="item in items" v-text="item"><span class="badge badge-dark badge-pill">14</span></li>
+                    </ul>
+                    <br>
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <button class="input-group-text" type="button" id="inputGroup-sizing-sm" @click="addName">Add item</button>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="input" v-model="newItem">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Recipient's Email" aria-label="Recipient's Email" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </body>
+        </div>  
+        <div class="row">
+            <div class="col">
+            <div class="h3 text-center text-info">Weather</div>
+            </div>
+            <div class="col">
+            <div class="h3 text-center text-info">Links</div>
+            </div>
+        </div>      
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#list',
+            data: {
+                newItem: '',
+                items: ['Meat', 'Veg', 'Fruit', 'Soap']
+            },
+            methods: {
+                addName() {
+                    this.items.push(this.newItem);
+                    this.newItem = '';
+                }
+            }
+        })
+    </script>
+</body>
 </html>
